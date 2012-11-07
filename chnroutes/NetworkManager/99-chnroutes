@@ -1,0 +1,16 @@
+#!/bin/sh
+
+INTERFACE=$1
+STATUS=$2
+
+case "$STATUS" in
+        'vpn-up')
+                exec /etc/chnroutes/vpnup #chnroutes 生成的 ip-pre-up
+                ;;
+        'vpn-down')
+                #if [ "$CONNECTION_UUID" != "a74e5988-72db-4116-8583-d3646ef5a78a" || "$CONNECTION_UUID" != "18295357-57c6-4925-9780-180c6ed89c66" ]; then
+                exec /etc/chnroutes/vpndown #chnroutes 生成的 ip-down
+                #fi
+                ;;
+esac
+

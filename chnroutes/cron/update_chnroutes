@@ -1,0 +1,9 @@
+#!/bin/bash
+cd /etc/chnroutes
+python2 chnroutes.py -p linux 2>&1 >/dev/null
+#echo "Fetching data from apnic.net, it might take a few minutes, please wait..."
+mv ip-pre-up vpnup && mv ip-down vpndown
+
+sed -i '/^OLDGW/d' vpnup && sed -i '/export/a OLDGW=`ip route show | sed "/tun*/d"  | grep "^[^d].*proto static" | sed -e "s/.*via \\([^ ]*\\).*/\\1/"`' vpnup
+
+chmod +x vpn*
